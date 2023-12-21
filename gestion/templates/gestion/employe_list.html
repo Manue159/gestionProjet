@@ -1,0 +1,40 @@
+{% extends "gestion/base.html" %}
+
+{% block title %}Employes list{% endblock title %}
+
+{% block content %}
+<section id="team" class="team section-bg">
+    <div class="container">
+        <div class="section-title">
+            <span>EMPLOYEES</span>
+            <h2>EMPLOYEES</h2>
+            <a class="btn btn-secondary" href="{% url 'employee_new' %}">Add New Employee</a>
+        </div>
+        <div class="row">
+            {% for employee in employees %}
+            <div class="col-lg-4 col-md-6 align-items-stretch">
+                <div class="member">
+                    <img src="assets/img/team/team-1.jpg" alt="">
+                    <h4>{{employee.first_name}} {{employee.last_name}}</h4>
+                    <span>{{employee.position}}</span>
+                    <p>{{employee.email}}</p>
+                    <h5><a href="tel:{{employee.phone_number}}">{{employee.phone_number}}</a></h5>
+                    <p>Hired on {{employee.hire_date}}</p>
+                    <p>Materials used:
+                        {% for material in employee.assigned_materials.all %}
+                            {{ material.name }}
+                        {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                    <button class="btn btn-success mt-3"> <a href="{% url 'employee_edit' pk=employee.pk %}"
+                            style="color: #fff;">Update</a> </button>
+                    <button class="btn btn-danger mt-3"><a href="{% url 'employee_remove' pk=employee.pk %}"
+                            style="color: #fff;">Delete</a></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

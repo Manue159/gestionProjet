@@ -1,0 +1,41 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title">
+            <span>LOGIN</span>
+            <h2>LOGIN</h2>
+            <p>Login to access the application features</p>
+        </div>
+        <div class="row">
+            {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <div class="col-lg-4 mt-5 mt-lg-0 align-items-center text-center" style="margin: 0 auto;">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-group mt-3">
+                            <label for="id_username">{{ form.username.label_tag }}</label>
+                            <input type="text" name="username" class="form-control" autofocus autocapitalize="none"
+                                id="id_username" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="id_password">{{ form.password.label_tag }}</label>
+                            <input type="password" class="form-control" autocomplete="current-password" name="password"
+                                id="id_password" required>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn-get-started">Login</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

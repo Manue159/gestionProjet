@@ -1,0 +1,28 @@
+{% extends "gestion/base.html" %}
+
+{% block title %}Positions list{% endblock title %}
+
+{% block content %}
+<section id="services" class="services section-bg">
+    <div class="container">
+        <div class="section-title">
+            <span>Positions</span>
+            <h2>Positions</h2>
+            <a class="btn btn-secondary" href="{% url 'position_new' %}">Add New Position</a>
+        </div>
+        <div class="row">
+            {% for position in positions %}
+            <div class="col-lg-4 col-md-6 align-items-stretch mt-3 mb-3">
+                <div class="icon-box">
+                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                    <h4><a href="#">{{position.title}}</a></h4>
+                    <button class="btn btn-success mt-3"> <a href="{% url 'position_edit' pk=position.pk %}" style="color: #fff;">Update</a> </button>
+                    <button class="btn btn-danger mt-3"><a href="{% url 'position_remove' pk=position.pk %}" style="color: #fff;">Delete</a></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
