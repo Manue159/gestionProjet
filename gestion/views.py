@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from gestion.forms import EmployeeForm, MaterialForm, PositionForm
 from gestion.models import Employee, Material, Position
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 #employees
@@ -44,7 +45,7 @@ def employee_edit(request, pk):
 
             assigned_materials = form.cleaned_data['assigned_materials']
             employee.assigned_materials.set(assigned_materials)
-            
+
             return redirect('employee_list')
     else:
         form = EmployeeForm(instance=employee)
@@ -137,3 +138,10 @@ def position_remove(request, pk):
     position = get_object_or_404(Position, pk=pk)
     position.delete()
     return redirect('position_list')
+
+@login_required
+def signout(request):
+    logout(request)
+    return redirect('/')
+
+

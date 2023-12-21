@@ -18,4 +18,5 @@ urlpatterns = [
     path('position/<int:pk>/edit/', views.position_edit, name='position_edit'),
     path('position/<pk>/remove/', views.position_remove, name='position_remove'),
 
+    path('logout/',views.signout, name='logout'),
 ]
