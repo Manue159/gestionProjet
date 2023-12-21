@@ -22,14 +22,16 @@
                     <p>Hired on {{employee.hire_date}}</p>
                     <p>Materials used:
                         {% for material in employee.assigned_materials.all %}
-                            {{ material.name }}
+                        {{ material.name }}
                         {% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </p>
+                    {% if user.is_authenticated %}
                     <button class="btn btn-success mt-3"> <a href="{% url 'employee_edit' pk=employee.pk %}"
                             style="color: #fff;">Update</a> </button>
                     <button class="btn btn-danger mt-3"><a href="{% url 'employee_remove' pk=employee.pk %}"
                             style="color: #fff;">Delete</a></button>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

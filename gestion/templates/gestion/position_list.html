@@ -16,8 +16,10 @@
                 <div class="icon-box">
                     <div class="icon"><i class="bx bxl-dribbble"></i></div>
                     <h4><a href="#">{{position.title}}</a></h4>
+                    {% if user.is_authenticated %}
                     <button class="btn btn-success mt-3"> <a href="{% url 'position_edit' pk=position.pk %}" style="color: #fff;">Update</a> </button>
                     <button class="btn btn-danger mt-3"><a href="{% url 'position_remove' pk=position.pk %}" style="color: #fff;">Delete</a></button>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

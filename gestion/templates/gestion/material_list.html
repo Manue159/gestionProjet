@@ -8,21 +8,25 @@
         <div class="section-title">
             <span>Materials</span>
             <h2>Materials</h2>
-            <a class="btn btn-secondary"" href="{% url 'material_new' %}">Add New Material</a>
-        <div class="row">
-            {% for material in materials %}
-            <div class="col-lg-4 col-md-6 mt-3 align-items-stretch">
-                <div class="icon-box">
-                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                    <h4><a href="">{{material.name}}</a></h4>
-                    <p>{{material.description}}</p>
-                    <button class="btn btn-success mt-3"> <a href="{% url 'material_edit' pk=material.pk %}" style="color: #fff;">Update</a> </button>
-                    <button class="btn btn-danger mt-3"><a href="{% url 'material_remove' pk=material.pk %}" style="color: #fff;">Delete</a></button>
+            <a class="btn btn-secondary"" href=" {% url 'material_new' %}">Add New Material</a>
+            <div class="row">
+                {% for material in materials %}
+                <div class="col-lg-4 col-md-6 mt-3 align-items-stretch">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                        <h4><a href="">{{material.name}}</a></h4>
+                        <p>{{material.description}}</p>
+                        {% if user.is_authenticated %}
+                        <button class="btn btn-success mt-3"> <a href="{% url 'material_edit' pk=material.pk %}"
+                                style="color: #fff;">Update</a> </button>
+                        <button class="btn btn-danger mt-3"><a href="{% url 'material_remove' pk=material.pk %}"
+                                style="color: #fff;">Delete</a></button>
+                        {% endif %}
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
 </section>
 
 {% endblock content %}
