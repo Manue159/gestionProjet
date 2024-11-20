@@ -3,60 +3,44 @@
 {% block title %}Add New Employee Records{% endblock title %}
 
 {% block content %}
-<section id="contact" class="contact">
+<div id="contact" class="form-1">
     <div class="container">
-        <div class="section-title">
-            <span>ADD NEW EMPLOYEE</span>
-            <h2>ADD NEW EMPLOYEE</h2>
-            <p>Fill the form below to add a new employee</p>
-        </div>
         <div class="row">
-            <div class="col-lg-4 mt-5 mt-lg-0 align-items-center text-center" style="margin: 0 auto;">
-                <form method="post" action="{% url 'employee_new' %}">
+            <div class="col-lg-12">
+                <h2 class="h2-heading"><span>ADD NEW EMPLOYEE</span><br></h2>
+                <p class="p-heading">Fill the form below to add a new employee</p>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+
+                <!-- Contact Form -->
+                <form method="post" action="{% url 'employee_new' %}" class="post-form">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="form-group mt-3">
-                            <label for="id_username">Firstname</label>
-                            {{ form.first_name }}
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="id_username">Lastname</label>
-                            {{ form.last_name }}
-                        </div>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field in form %}
+                            {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <div class="row">
-                        <div class="form-group mt-3">
-                            <label for="id_username">Email</label>
-                            {{ form.email }}
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="id_username">Phone number</label>
-                            {{ form.phone_number }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group mt-3">
-                            <label for="id_username">Hire date</label>
-                            {{ form.hire_date }}
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="id_username">Materials</label>
-                            {{ form.assigned_materials }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="id_username">Position</label>
-                            {{ form.position }}
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    {% endif %}
+
+                    {{ form.as_p }}
+                    
+                    <div class="form-group">
+                        <button type="submit" class="form-control-submit-button">Submit</button>
                     </div>
                 </form>
-            </div>
+                <!-- end of contact form -->
 
-        </div>
-    </div>
-</section>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of form-1 -->
 
 {% endblock content %}

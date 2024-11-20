@@ -3,30 +3,43 @@
 {% block title %}Materials list{% endblock title %}
 
 {% block content %}
-<section id="services" class="services section-bg">
-    <div class="container">
-        <div class="section-title">
-            <span>Materials</span>
-            <h2>Materials</h2>
-            <a class="btn btn-secondary"" href=" {% url 'material_new' %}">Add New Material</a>
+
+    <!-- Services -->
+    <div id="services" class="cards-2 cards-1">
+        <div class="container">
             <div class="row">
-                {% for material in materials %}
-                <div class="col-lg-4 col-md-6 mt-3 align-items-stretch">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">{{material.name}}</a></h4>
-                        <p>{{material.description}}</p>
+                <div class="col-lg-12">
+                    <h2 class="h2-heading">
+                        <span>MATERIALS</span>
+                        <br>
+                        <a class="btn-outline-reg mt-4" href="{% url 'material_new' %}">Add New Material</a>
+                    </h2>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    {% for material in materials %}
+                    <!-- Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{material.name}}</h5>
+                            <p>{{material.description}}</p>
+                            
                         {% if user.is_authenticated %}
-                        <button class="btn btn-success mt-3"> <a href="{% url 'material_edit' pk=material.pk %}"
-                                style="color: #fff;">Update</a> </button>
-                        <button class="btn btn-danger mt-3"><a href="{% url 'material_remove' pk=material.pk %}"
-                                style="color: #fff;">Delete</a></button>
+                        <a class="btn-outline-reg" href="{% url 'material_edit' pk=material.pk %}">Update</a>
+                        <a class="btn-solid-reg" href="{% url 'material_remove' pk=material.pk %}">Delete</a>
                         {% endif %}
+                        </div>
                     </div>
-                </div>
+                    <!-- end of card -->
                 {% endfor %}
-            </div>
-        </div>
-</section>
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards-1 -->
+    <!-- end of services -->
 
 {% endblock content %}

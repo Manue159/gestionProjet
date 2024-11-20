@@ -3,30 +3,44 @@
 {% block title %}Add New Position Records{% endblock title %}
 
 {% block content %}
-<section id="contact" class="contact">
+<div id="contact" class="form-1">
     <div class="container">
-        <div class="section-title">
-            <span>ADD NEW POSITION</span>
-            <h2>ADD NEW POSITION</h2>
-            <p>Fill the form below to add a new position</p>
-        </div>
         <div class="row">
-            <div class="col-lg-4 mt-5 mt-lg-0 align-items-center text-center" style="margin: 0 auto;">
-                <form method="post" action="{% url 'position_new' %}">
+            <div class="col-lg-12">
+                <h2 class="h2-heading"><span>ADD NEW POSITION</span><br></h2>
+                <p class="p-heading">Fill the form below to add a position</p>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                
+                <!-- Contact Form -->
+                <form method="POST" class="post-form">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="form-group mt-3">
-                            <label for="id_username">Title</label>
-                            {{ form.title }}
-                        </div>
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>                    
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field in form %}
+                            {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    {{ form.as_p }}
+                    
+                    <div class="form-group">
+                        <button type="submit" class="form-control-submit-button">Submit</button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</section>
+                <!-- end of contact form -->
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of form-1 -->
 
 {% endblock content %}

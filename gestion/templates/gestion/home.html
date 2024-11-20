@@ -3,24 +3,31 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<section id="hero" class="d-flex align-items-center">
+
+<header id="header" class="header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h1>Business agency</h1>
-                <h2>We have what you need to develop your business</h2>
-                {% if user.is_authenticated %}
-                <div class="d-flex">
-                    <p>Explore your application to make changes</p>
-                </div>
-                {% else %}
-                <div class="d-flex">
-                    <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
+            <div class="col-lg-6 col-xl-5">
+                <div class="text-container">
+                    <div class="section-title">Welcome to our</div>
+                    <h1 class="h1-large">Business agency</h1>
+                    <p class="p-large">We have what you need to develop your business</p>
+                    {% if user.is_authenticated %}
+                    <a class="btn-solid-lg" href="#">Make changes</a>
+                    {% else %}
+                    <a class="btn-solid-lg" href="#">Get Started</a>
+                    {% endif %}
+                </div> <!-- end of text-container -->
+            </div> <!-- end of col -->
+            <div class="col-lg-6 col-xl-7">
+                <div class="image-container">
+                    {% load static %}
+                    <img class="img-fluid" src="{% static 'images/header-illustration.svg' %}" alt="alternative">
+                </div> <!-- end of image-container -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</header> <!-- end of header -->
+<!-- end of header -->
 
 {% endblock content %}

@@ -17,6 +17,8 @@ def employee_list(request):
 
 @login_required
 def employee_new(request):
+    material = Material.objects.all()
+    position = Position.objects.all()
     if request.method == "POST":
         form = EmployeeForm(request.POST)
         if form.is_valid():
@@ -30,11 +32,13 @@ def employee_new(request):
             return redirect('employee_list')
     else:
         form = EmployeeForm()
-    return render(request, 'gestion/employe_new.html', {'form': form})
+    return render(request, 'gestion/employe_new.html', {'form': form, 'materials': material, 'positions': position})
 
 
 @login_required
 def employee_edit(request, pk):
+    material = Material.objects.all()
+    position = Position.objects.all()
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == "POST":
         form = EmployeeForm(request.POST, instance=employee)
@@ -49,7 +53,7 @@ def employee_edit(request, pk):
             return redirect('employee_list')
     else:
         form = EmployeeForm(instance=employee)
-    return render(request, 'gestion/employe_edit.html', {'form': form})
+    return render(request, 'gestion/employe_edit.html', {'form': form, 'materials': material, 'positions': position})
 
 
 @login_required

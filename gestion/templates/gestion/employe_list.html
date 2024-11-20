@@ -3,40 +3,56 @@
 {% block title %}Employes list{% endblock title %}
 
 {% block content %}
-<section id="team" class="team section-bg">
+<div id="pricing" class="cards-2">
     <div class="container">
-        <div class="section-title">
-            <span>EMPLOYEES</span>
-            <h2>EMPLOYEES</h2>
-            <a class="btn btn-secondary" href="{% url 'employee_new' %}">Add New Employee</a>
-        </div>
         <div class="row">
-            {% for employee in employees %}
-            <div class="col-lg-4 col-md-6 align-items-stretch">
-                <div class="member">
-                    <img src="assets/img/team/team-1.jpg" alt="">
-                    <h4>{{employee.first_name}} {{employee.last_name}}</h4>
-                    <span>{{employee.position}}</span>
-                    <p>{{employee.email}}</p>
-                    <h5><a href="tel:{{employee.phone_number}}">{{employee.phone_number}}</a></h5>
-                    <p>Hired on {{employee.hire_date}}</p>
-                    <p>Materials used:
-                        {% for material in employee.assigned_materials.all %}
-                        {{ material.name }}
-                        {% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </p>
-                    {% if user.is_authenticated %}
-                    <button class="btn btn-success mt-3"> <a href="{% url 'employee_edit' pk=employee.pk %}"
-                            style="color: #fff;">Update</a> </button>
-                    <button class="btn btn-danger mt-3"><a href="{% url 'employee_remove' pk=employee.pk %}"
-                            style="color: #fff;">Delete</a></button>
-                    {% endif %}
+            <div class="col-lg-12">
+                <h2 class="h2-heading">
+                    <span>EMPLOYEES</span>
+                    <br>
+                    <a class="btn-outline-reg mt-4" href="{% url 'employee_new' %}">Add New Employee</a>
+                </h2>
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                {% for employee in employees %}
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            {% load static %}
+                            <img class="decoration-lines" src="{% static 'images/decoration-lines.svg' %}"
+                                alt="alternative"><span>{{employee.first_name}} {{employee.last_name}}</span><img
+                                class="decoration-lines flipped" src="{% static 'images/decoration-lines.svg' %}"
+                                alt="alternative">
+                        </div>
+                        <ul class="list-unstyled li-space-lg">
+                            <li>{{employee.position}}</li>
+                            <li>{{employee.email}}</li>
+                            <li>{{employee.phone_number}}</li>
+                            <li>Hired on {{employee.hire_date}}</li>
+                        </ul>
+                        <p>Materials used:
+                            {% for material in employee.assigned_materials.all %}
+                            {{ material.name }}
+                            {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        {% if user.is_authenticated %}
+                        <a class="btn-outline-reg" href="{% url 'employee_edit' pk=employee.pk %}">Update</a>
+                        <a class="btn-solid-reg" href="{% url 'employee_remove' pk=employee.pk %}">Delete</a>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+                <!-- end of card -->
+                {% endfor %}
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of cards-2 -->
 
 {% endblock content %}
